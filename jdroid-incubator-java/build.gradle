@@ -1,0 +1,49 @@
+apply plugin: 'java'
+
+ext.projectName = 'Jdroid Incubator Java'
+description = 'Jdroid Incubator dependency project for both Android & Java apps'
+
+repositories {
+	maven {
+		url "http://dl.dropbox.com/u/8520947/maven-repository/"
+	}
+}
+
+buildscript {
+	repositories {
+		maven {
+			url "http://dl.dropbox.com/u/8520947/maven-repository/"
+		}
+	}
+}
+
+dependencies {
+
+	// Email Sending
+	compile "android.mail:mail:1.0"
+	compile "android.mail:activation:1.0"
+	compile "android.mail:additionnal:1.0"
+
+	// Testing
+	testCompile "org.testng:testng:6.3"
+	testCompile "org.mockito:mockito-all:1.8.5"
+}
+
+task javadocJar(type: Jar) {
+	classifier = 'javadoc'
+	from javadoc
+}
+
+task sourcesJar(type: Jar) {
+	classifier = 'sources'
+	from sourceSets.main.allSource
+}
+
+artifacts {
+	archives javadocJar, sourcesJar
+}
+
+test {
+	useTestNG {
+	}
+}

@@ -1,0 +1,44 @@
+apply plugin: 'java'
+
+ext.projectName = 'Jdroid Incubator Java Web'
+description = 'Jdroid Incubator dependency project for Java Web apps'
+
+repositories {
+	maven {
+		url "http://dl.dropbox.com/u/8520947/maven-repository/"
+	}
+}
+
+buildscript {
+	repositories {
+		maven {
+			url "http://dl.dropbox.com/u/8520947/maven-repository/"
+		}
+	}
+}
+
+dependencies {
+
+	// Testing
+	testCompile "org.testng:testng:6.3"
+	testCompile "org.mockito:mockito-all:1.8.5"
+}
+
+task javadocJar(type: Jar) {
+	classifier = 'javadoc'
+	from javadoc
+}
+
+task sourcesJar(type: Jar) {
+	classifier = 'sources'
+	from sourceSets.main.allSource
+}
+
+artifacts {
+	archives javadocJar, sourcesJar
+}
+
+test {
+	useTestNG {
+	}
+}

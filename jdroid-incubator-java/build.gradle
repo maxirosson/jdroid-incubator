@@ -23,6 +23,10 @@ dependencies {
 	compile "android.mail:mail:1.0"
 	compile "android.mail:activation:1.0"
 	compile "android.mail:additionnal:1.0"
+	
+	compile("org.apache.james:apache-mime4j:0.6") {
+		exclude group: 'commons-logging', module: 'commons-logging'
+	}
 
 	// Testing
 	testCompile "org.testng:testng:6.3"
